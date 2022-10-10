@@ -12,3 +12,5 @@ Random defination: Having no specific pattern, purpose, or objective: synonym: c
 When roll a dice, the result might seem random, but the result was determined by many different factors, 
 like how high throw it, how much force did you apply to it, the surface where dice landed etc.
 
+perspectives determine random
+
