@@ -1,0 +1,10 @@
+body{
+    background-color: rgb(149, 226, 229);
+}
+
+.box{
+    height: 100px;
+    width: 100px;
+    background: rgb(193, 111, 35);
+    display: inline-block ;
+}
