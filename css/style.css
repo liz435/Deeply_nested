@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(149, 226, 229);
+    background-color: rgb(125, 125, 125);
 }
 
 .box{
@@ -8,3 +8,13 @@ body{
     background: rgb(193, 111, 35);
     display: inline-block ;
 }
+
+.title{
+    text-align: center;
+    color: aliceblue;
+}
+
+h1{
+    color: white;
+}
+
