@@ -70,8 +70,7 @@ const generateRandom = function(IDs,num){
 
     random = setInterval(function(){
         feed = now[num];
-            
-    
+
     },2000)
     console.log(now);
 }
