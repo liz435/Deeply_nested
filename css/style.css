@@ -23,15 +23,19 @@ h1{
 }
 
 .shape{
-position: absolute;
+    position: absolute;
+}
+
+.five{
+    position: absolute;
 }
 
 .shapetwo{
-position: absolute;
+    position: absolute;
 }
 
 .box{
-position: absolute;
+    position: absolute;
 }
 
 .boxTwo{
@@ -39,11 +43,10 @@ position: absolute;
 }
 
 .smallbox{
-position: absolute;
-
+    position: absolute;
 }
 
 
 .shapFour{
-position: absolute;
+    position: absolute;
 }

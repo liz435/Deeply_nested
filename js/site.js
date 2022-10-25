@@ -27,6 +27,13 @@ var API;
 var IDs =[];
 var feed;
 var modFeed;
+var rev;
+var floatC;
+var C=0;
+var moveC;
+var R=400;
+var moveCC;
+var RR=0;
 
 
 fetch('https://api.nasa.gov/neo/rest/v1/feed?start_date=2022-09-20&end_date='+ apiDateEnd +'&api_key=kEUozmDTguvnQPEtSsYX6J0zXWJjQ5tKapgRwbct')
@@ -36,7 +43,7 @@ fetch('https://api.nasa.gov/neo/rest/v1/feed?start_date=2022-09-20&end_date='+ a
 function collectData(NASAdata){
     generateShape();
 const listAll = NASAdata;
-console.log(listAll);
+// console.log(listAll);
 
 //   const countElement = document.createElement("h1");
 //   countElement.innerHTML = NASAdata.element_count;
@@ -65,11 +72,11 @@ const generateRandom = function(){
             now.push(element[i])
         }
     })
-        console.log(num);
+        // console.log(num);
         feed =now[num];
         modFeed = Number(feed)/22;
         if(isNaN(modFeed)){
-            console.log("NNNNNN")
+            // console.log("NNNNNN")
             modFeed = 0.01; 
         }else{}
 }
@@ -91,11 +98,12 @@ const generateShape = function(){
         let status = true;
         if(status ===false){
                 X -=10*modFeed;
-                console.log(X);
-                console.log(modFeed);
+                // console.log(X);
+                // console.log(modFeed);
                 shape.style.marginLeft=""+X+"px";
             if(X<=10){
                 status = true;
+                
             }
         }
 
@@ -154,10 +162,11 @@ const generateShapeTwo = function(){
             if(wid>=0){
                 wid -=modFeed;
                 shapeTwo.style.width= ""+ wid +"px";
+                
             }else{}
             
         }
-        console.log("wid" + modFeed)
+        // console.log("wid" + modFeed)
     },20)
     
     generateShapeThree();
@@ -173,9 +182,11 @@ const generateShapeThree = function(){
     // box.style.borderRadius="10%";
 
     moveH = setInterval(function(){
+        
         if(modFeed<=0.12){
             H+=20*modFeed;
             box.style.height= ""+ H +"px";
+            rev = true;
         }else{
             if(H>=0){
                 H -=modFeed;
@@ -208,11 +219,11 @@ const generateShapeThree = function(){
         boxTwo.style.marginLeft="300px";
         boxTwo.style.marginTop="150px";
         
-        boxTwo.style.border="30px solid rgba(255,255,255,0.6)";
+        boxTwo.style.border="15px solid rgba(255,255,255,0.6)";
         boxTwo.style.backgroundColor="transparent";
         moveHT = setInterval(function(){
             if(modFeed<=0.12){
-                HT+=20*modFeed;
+                HT+=15*modFeed;
                 boxTwo.style.height= ""+ HT +"px";
             }else{
                 if(H>=0){
@@ -224,12 +235,12 @@ const generateShapeThree = function(){
     
         moveWT = setInterval(function(){
     
-            if(modFeed<=0.12){
-                WT+=20*modFeed;
+            if(modFeed<=0.18){
+                WT+=15*modFeed;
                 boxTwo.style.width= ""+ WT +"px";
             }else{
                 if(W>=0){
-                    WT -=modFeed;
+                    WT -=3*modFeed;
                     boxTwo.style.width= ""+ WT +"px";
                 }else{}
             }
@@ -243,25 +254,78 @@ const generateShapeThree = function(){
 const generateShapeFour = function(){
     const shapeFour = document.createElement('div');
     shapeFour.classList.add('shapeFour');
-    shapeFour.style.marginLeft="900px";
-    shapeFour.style.marginTop="200px";
-    shapeFour.style.background ="radial-gradient(circle, rgba("+RGBA[0]+","+ +RGBA[1] +","+ +RGBA[2]+","+RGBA[0]+") 0%, rgba(0,0,0,0) 80%)";
+    shapeFour.style.marginLeft="120px";
+    shapeFour.style.marginTop="250px";
+    shapeFour.style.background ="radial-gradient(circle, rgba("+RGBA[0]+","+ +RGBA[1] +","+ +RGBA[2]+","+RGBA[0]+") 0%, rgba(0,0,0,0) 90%)";
     shapeFour.style.borderRadius="50%";
-
-    moveH = setInterval(function(){
-        let B;
-        B +=feed;
-        shapeFour.style.height= ""+ B*feed +"px";
+ 
+    floatC = setInterval(function(){
+        C+=0.03;
+        let newC = 100*Math.sin(C);
+        shapeFour.style.height=""+newC+"px";
+        shapeFour.style.width=""+newC+"px";
     },20)
-
-
-    moveW = setInterval(function(){
-        let F;
-        F +=1*feed;
-        shapeFour.style.Weight= ""+ F*2 +"px";
-    },20)
-
     document.body.appendChild(shapeFour);
+    generateFive();
+}
+
+const generateFive = function(){
+    const shapeFive = document.createElement('div');
+    shapeFive.classList.add('five');
+    shapeFive.style.marginLeft="500px";
+    shapeFive.style.borderRadius="50%";
+    shapeFive.style.border="8px dotted rgba(255,255,255,1)";
+    shapeFive.style.height="300px";
+    shapeFive.style.width="300px";
+    document.body.appendChild(shapeFive);
+
+
+    moveC = setInterval(function(){
+        if(modFeed<=0.1){
+            R-=2*modFeed;
+            shapeFive.style.height= ""+ R +"px";
+            shapeFive.style.width= ""+ R +"px";
+        }else{
+            if(R>=0){
+            R +=modFeed;
+            shapeFive.style.height= ""+ R +"px";
+            shapeFive.style.width= ""+ R +"px";
+            }else{}
+        }
+    },20)
+
+
+
+    generateSix();
+}
+
+const generateSix = function(){
+    const shapeFive = document.createElement('div');
+    shapeFive.classList.add('five');
+    shapeFive.style.marginLeft="800px";
+    shapeFive.style.borderRadius="50%";
+    shapeFive.style.border="8px dotted rgba(0,0,0,1)";
+    shapeFive.style.height="300px";
+    shapeFive.style.width="300px";
+    document.body.appendChild(shapeFive);
+
+
+    moveCC = setInterval(function(){
+        if(modFeed<=0.2){
+            RR+=5*modFeed;
+            shapeFive.style.height= ""+ RR +"px";
+            shapeFive.style.width= ""+ RR +"px";
+        }else{
+            if(RR>=0){
+            RR -=8*modFeed;
+            shapeFive.style.height= ""+ RR +"px";
+            shapeFive.style.width= ""+ RR +"px";
+            console.log(RR);
+            }else{
+                RR=0;
+            }
+        }
+    },20)
     generateRandom();
 }
 
