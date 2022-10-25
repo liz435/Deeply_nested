@@ -14,72 +14,63 @@ var moveX;
 var moveY;
 var X =0;
 var Y =0;
-var degrees = 0;
+var degrees =0;
 var num =0;
-var number;
 var random;
 var RGBA =['255','255','255','0'];
 var API;
-var feed = "";
+var IDs =[];
+var feed;
+var modFeed;
 
-API = setInterval(function(){
-    
-},20)
 
-fetch('https://api.nasa.gov/neo/rest/v1/feed?start_date=2022-09-17&end_date='+ apiDateEnd +'&api_key=kEUozmDTguvnQPEtSsYX6J0zXWJjQ5tKapgRwbct')
+fetch('https://api.nasa.gov/neo/rest/v1/feed?start_date=2022-09-20&end_date='+ apiDateEnd +'&api_key=kEUozmDTguvnQPEtSsYX6J0zXWJjQ5tKapgRwbct')
 .then(res =>res.json())
 .then(NASAdata => collectData(NASAdata))
 
 function collectData(NASAdata){
+    generateShape();
 const listAll = NASAdata;
 console.log(listAll);
 
 //   const countElement = document.createElement("h1");
 //   countElement.innerHTML = NASAdata.element_count;
 //   document.body.appendChild(countElement);
-
-  let IDs =[];
+ 
   for(let i=0, len = NASAdata.near_earth_objects[apiDateEnd].length; i<len; i++){
     let newID = NASAdata.near_earth_objects[apiDateEnd][i].id;
     IDs.push(newID);
   }
-  console.log(IDs)
-  loopFunc(IDs,num);
+  loopFunc();
 }
 
-const loopFunc= setInterval(function(IDs,num){
-    generateRandom(IDs,num);
-    num++;
-},2000);
+const loopFunc= function(){
+    let run = setInterval(function(){
+        generateRandom();
+    num+=1;
 
-const generateRandom = function(IDs,num){
-    var now = [];
+    },4000)
     
-    // for(let i =0; i<IDs.length;i++){
-    //     console.log(IDs[i]);
-    //     for(let p=0, len = IDs[i].length; i<len; i++){
-    //         // console.log(IDs[i]);
-    //     }
-    // }
+}
 
+const generateRandom = function(){
+    var now = [];
     IDs.forEach(element => {
         for(let i=0, len = element.length; i<len; i++){
-            now.push(element[i]);
+            now.push(element[i])
         }
-    });
-
-    random = setInterval(function(){
-        feed = now[num];
-
-    },2000)
-    console.log(now);
+    })
+        console.log(num);
+        feed =now[num];
+        modFeed = Number(feed)/22;
+        if(isNaN(modFeed)){
+            console.log("NNNNNN")
+            modFeed = 0.01; 
+        }else{}
 }
-
-
 
 const generateShape = function(){
     let width = "350px";
-    
     const shape = document.createElement('div');
     shape.classList.add('shape')
     shape.style.background ="radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(0,0,0,0) 90%)";
@@ -88,34 +79,45 @@ const generateShape = function(){
     shape.style.marginLeft="auto";
     shape.style.marginRight="auto";
     shape.style.marginTop="50px";
+    shape.style.borderRadius="10px";
     shape.style.zIndex="0";
+
     moveX = setInterval(function(){
-        if(X >=700){
-            X +=0.3*feed;
-            shape.style.marginLeft=""+feed+"px";
-        }else if(X >=0){
-            X=0.3*feed;
-            shape.style.marginLeft=""+feed+"px";
+        let status = true;
+        if(status ===false){
+                X -=10*modFeed;
+                console.log(X);
+                console.log(modFeed);
+                shape.style.marginLeft=""+X+"px";
+            if(X<=10){
+                status = true;
+            }
         }
-    },20)
+
+        if(X>=0&&status===true){
+            if(X >= 700){status = false;}else{
+                X+=10*modFeed;
+                
+                shape.style.marginLeft=""+X+"px";
+            }
+        }
+    },50)
+
     moveY = setInterval(function(){
-        
             // Y +=1;
             // shape.style.marginLeft=""+Y+"px";
-
-        
     },20)
 
     rotation = setInterval(function(){
-        degrees+=0.2*feed;
-        shape.style.webkitTransform = 'rotate(' + degrees*0.3*feed + 'deg)';
-    },100)
+        degrees+= modFeed;
+        shape.style.webkitTransform = 'rotate(' + degrees + 'deg)';
+    },10)
 
     moveH = setInterval(function(){
-        let Hi;
-        Hi+=feed;
-        shape.style.height= ""+ Hi*feed +"px";
-    },120)
+    
+        H+=feed;
+        shape.style.height= ""+ H*feed +"px";
+    },10)
 
     moveW = setInterval(function(){
         let Wi;
@@ -141,7 +143,7 @@ const generateShapeTwo = function(){
 
     moveW = setInterval(function(){
         let wid;
-        wid +=feed;
+        wid +=modFeed;
         shapeTwo.style.width= ""+ wid +"px";
     },20)
     
@@ -158,8 +160,8 @@ const generateShapeThree = function(){
     // box.style.borderRadius="10%";
 
     moveH = setInterval(function(){
-        H=30*feed;
-        box.style.height= ""+ H*feed +"px";
+        H+=2*modFeed;
+        box.style.height= ""+ H*modFeed +"px";
     },20)
 
     moveW = setInterval(function(){
@@ -196,7 +198,6 @@ const generateShapeFour = function(){
     document.body.appendChild(shapeFour);
 
     generateRandom();
-    
 }
 
 
