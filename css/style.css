@@ -1,5 +1,8 @@
 body{
-    background-color: rgb(125, 125, 125);
+    /* background: black; */
+    background-image: url('/8x8.png');
+    background-size: 10%;
+    
 }
 
 .box{
@@ -11,10 +14,35 @@ body{
 
 .title{
     text-align: center;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px rgb(255, 72, 72);
 }
 
 h1{
-    color: white;
+    font-size: 50px;
 }
 
+.shape{
+position: absolute;
+}
+
+.shapetwo{
+position: absolute;
+}
+
+.box{
+position: absolute;
+}
+
+.smallbox{
+position: absolute;
+
+}
+
+.box.border{
+    background:radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(0,0,0,0) 70%);
+}
+
+.shapFour{
+position: absolute;
+}
