@@ -8,8 +8,13 @@ let apiDateStart = "2022-09"+today-6;
 var rotation;
 var moveH;
 var moveW;
+var moveHT;
+var moveWT;
+var wid =0;
 var H = 0;
 var W = 0;
+var HT = 0;
+var WT = 0;
 var moveX;
 var moveY;
 var X =0;
@@ -113,17 +118,17 @@ const generateShape = function(){
         shape.style.webkitTransform = 'rotate(' + degrees + 'deg)';
     },10)
 
-    moveH = setInterval(function(){
+    // moveH = setInterval(function(){
     
-        H+=feed;
-        shape.style.height= ""+ H*feed +"px";
-    },10)
+    //     H+=feed;
+    //     shape.style.height= ""+ H*feed +"px";
+    // },10)
 
-    moveW = setInterval(function(){
-        let Wi;
-        Wi+=feed;
-        shape.style.Weight= ""+ Wi*0.5*feed +"px";
-    },120)
+    // moveW = setInterval(function(){
+    //     let Wi;
+    //     Wi+=feed;
+    //     shape.style.Weight= ""+ Wi*0.5*feed +"px";
+    // },120)
 
     document.body.appendChild(shape);
     
@@ -137,14 +142,22 @@ const generateShapeTwo = function(){
     shapeTwo.style.background ="radial-gradient(circle, rgba("+RGBA[0]+","+ +RGBA[1] +","+ +RGBA[2]+","+RGBA[0]+") 0%, rgba(0,0,0,0) 80%)";
     shapeTwo.style.height ="35px";
     shapeTwo.style.width="300px";
-    shapeTwo.style.borderRadius="50%";
-    shapeTwo.style.webkitTransform = 'rotate(-30deg)';
+    shapeTwo.style.webkitTransform = 'rotate(-30deg)'
+    shapeTwo.style.marginLeft="700px";
     document.body.appendChild(shapeTwo);
 
     moveW = setInterval(function(){
-        let wid;
-        wid +=modFeed;
-        shapeTwo.style.width= ""+ wid +"px";
+        if(modFeed<=0.25){
+            wid +=modFeed;
+            shapeTwo.style.width= ""+ wid +"px";
+        }else{
+            if(wid>=0){
+                wid -=modFeed;
+                shapeTwo.style.width= ""+ wid +"px";
+            }else{}
+            
+        }
+        console.log("wid" + modFeed)
     },20)
     
     generateShapeThree();
@@ -153,26 +166,79 @@ const generateShapeTwo = function(){
 const generateShapeThree = function(){
     const box = document.createElement('div');
     box.classList.add('box');
-    box.style.marginLeft="500px";
+    box.style.marginLeft="650px";
     
-    box.style.border="30px solid white";
+    box.style.border="30px solid rgba(255,255,255,0.9)";
     box.style.backgroundColor="transparent";
     // box.style.borderRadius="10%";
 
     moveH = setInterval(function(){
-        H+=2*modFeed;
-        box.style.height= ""+ H*modFeed +"px";
+        if(modFeed<=0.12){
+            H+=20*modFeed;
+            box.style.height= ""+ H +"px";
+        }else{
+            if(H>=0){
+                H -=modFeed;
+                box.style.height= ""+ H +"px";
+            }else{}
+        }
     },20)
 
     moveW = setInterval(function(){
-        W=50*feed;
-        box.style.Weight= ""+ W*0.5*feed +"px";
-    },20)
 
+        if(modFeed<=0.12){
+            W+=20*modFeed;
+            box.style.width= ""+ W +"px";
+        }else{
+            if(W>=0){
+                W -=modFeed;
+                box.style.width= ""+ W +"px";
+            }else{}
+        }
+    },20)
     document.body.appendChild(box);
+    generateShapeBox();
+
+}
+
+
+    const generateShapeBox = function(){
+        const boxTwo = document.createElement('div');
+        boxTwo.classList.add('boxTwo');
+        boxTwo.style.marginLeft="300px";
+        boxTwo.style.marginTop="150px";
+        
+        boxTwo.style.border="30px solid rgba(255,255,255,0.6)";
+        boxTwo.style.backgroundColor="transparent";
+        moveHT = setInterval(function(){
+            if(modFeed<=0.12){
+                HT+=20*modFeed;
+                boxTwo.style.height= ""+ HT +"px";
+            }else{
+                if(H>=0){
+                    HT -=modFeed;
+                    boxTwo.style.height= ""+ HT +"px";
+                }else{}
+            }
+        },20)
+    
+        moveWT = setInterval(function(){
+    
+            if(modFeed<=0.12){
+                WT+=20*modFeed;
+                boxTwo.style.width= ""+ WT +"px";
+            }else{
+                if(W>=0){
+                    WT -=modFeed;
+                    boxTwo.style.width= ""+ WT +"px";
+                }else{}
+            }
+        },20)
+    
+        document.body.appendChild(boxTwo);
 
     generateShapeFour();
-}
+    }
 
 const generateShapeFour = function(){
     const shapeFour = document.createElement('div');
@@ -196,7 +262,6 @@ const generateShapeFour = function(){
     },20)
 
     document.body.appendChild(shapeFour);
-
     generateRandom();
 }
 

@@ -34,14 +34,15 @@ position: absolute;
 position: absolute;
 }
 
+.boxTwo{
+    position: absolute;
+}
+
 .smallbox{
 position: absolute;
 
 }
 
-.box.border{
-    background:radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(0,0,0,0) 70%);
-}
 
 .shapFour{
 position: absolute;
